@@ -20,7 +20,17 @@
         <!-- The applications will be displayed here -->
     </div>
 
-    
+    <!-- Check application status -->
+    <div id="checkStatus">
+        <h2>Check Application Status</h2>
+        <input type="text" id="applicationNumber" placeholder="Enter Application Number">
+        <button onclick="checkStatus()">Check Status</button>     
+    </div>
+
+    <!-- Show the application results -->
+    <div id="applicationStatus">
+        <!-- The application status will be displayed here -->
+    </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

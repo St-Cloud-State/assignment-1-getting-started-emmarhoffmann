@@ -22,6 +22,11 @@ function submitApplication() {
     })
         .then(response => response.json())
         .then(data => {
+
+            // Store the application number
+            applicationData.number = data.application_number;
+
+            
             // Display a success message or handle errors if needed
             console.log(data.message);
 
@@ -30,7 +35,7 @@ function submitApplication() {
             console.log(applications)
 
             // Refresh the display
-            displayApplications();
+            displayApplications(applicationData);
         })
         .catch(error => {
             console.error('Error submitting the application:', error);
@@ -48,11 +53,31 @@ function displayApplications() {
         const applicationElement = document.createElement('div');
         applicationElement.innerHTML = `
             <h2>Added Successfully</h2>
-                <p>Name: {application.name} </p>
-                <p>Zipcode: {application.zipcode} </p>
+                <p>Name: ${application.name} </p>
+                <p>Zipcode: ${application.zipcode} </p>
+                <p>Application Number: ${application.number} </p>
         `;
         applicationList.appendChild(applicationElement);
     });
 }
 
 
+// Function for checking the status of application
+function checkStatus() {
+    const number = document.getElementById('applicationNumber').value;
+
+    // Send status check to server
+    fetch('/api/check-status?number=' + number) 
+        .then(response => response.json())
+        .then(data => {
+            const status = document.getElementById('applicationStatus');
+            status.innerHTML = `<h2>Status Check Result: ${data.status}</h2>`;
+
+            // Display a success message or handle errors if needed
+            console.log(data.status);    
+        })
+
+        .catch(error => {
+            console.error('Error hecking the application status:', error);
+        });
+}
