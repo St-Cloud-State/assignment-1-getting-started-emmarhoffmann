@@ -42,6 +42,19 @@ def check_status():
         return jsonify({'status': applications[application_number]['status']})
     return jsonify({'status': 'not found'})
 
+# Route to update the application status
+@app.route('/api/update-status', methods=['POST'])
+def update_status():
+    print("updating status...")
+    data = request.get_json()
+    application_number = int(data.get('number'))
+    new_status = data.get('status')
+
+    if application_number in applications:
+        applications[application_number]['status'] = new_status
+        return jsonify({'status': 'Status successfully updated'})
+    return jsonify({'status': 'not found'})
+
 
 # Route to render the index.html page
 @app.route('/')

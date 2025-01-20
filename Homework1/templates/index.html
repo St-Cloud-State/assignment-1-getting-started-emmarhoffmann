@@ -32,6 +32,24 @@
         <!-- The application status will be displayed here -->
     </div>
 
+    <!-- Change  application status -->
+    <div id="changeStatus">
+        <h2>Change Application Status</h2>
+        <input type="text" id="updateNumber" placeholder="Enter Application Number">
+        <select id="newStatus">
+            <option>received</option>
+            <option>processing</option>
+            <option>accepted</option>
+            <option>rejected</option>
+        </select>
+        <button onclick="updateStatus()">Update</button>     
+    </div>
+
+    <!-- Show the update -->
+    <div id="updateResult">
+        <!-- The application status update will be displayed here -->
+    </div>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 

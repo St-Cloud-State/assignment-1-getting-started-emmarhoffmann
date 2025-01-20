@@ -71,13 +71,41 @@ function checkStatus() {
         .then(response => response.json())
         .then(data => {
             const status = document.getElementById('applicationStatus');
-            status.innerHTML = `<h2>Status Check Result: ${data.status}</h2>`;
+            status.innerHTML = `<h2>Status: ${data.status}</h2>`;
 
             // Display a success message or handle errors if needed
             console.log(data.status);    
         })
 
         .catch(error => {
-            console.error('Error hecking the application status:', error);
+            console.error('Error checking the application status:', error);
         });
+}
+
+
+// Function for updating the status of application
+function updateStatus() {
+    const number = document.getElementById('updateNumber').value;
+    const status = document.getElementById('newStatus').value;
+
+    // Send update request to server
+    fetch('/api/update-status', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            number: number,
+            status: status
+        })
+    })
+
+        .then(response => response.json())
+        .then(data => {
+            const result = document.getElementById('updateResult');
+            result.innerHTML = `<h2>Status Successfully Updated</h2>`;
+        })
+        .catch(error => {
+            console.error('Error updating the application status:', error);
+        });        
 }
